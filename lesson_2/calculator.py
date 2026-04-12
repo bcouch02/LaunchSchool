@@ -1,47 +1,47 @@
+
+def prompt(message): 
+    print(f'==> {message}')
+    
+def invalid_number(number_str):
+    try:
+        int(number_str)
+    except ValueError:
+        return True
+    
+    return False
+        
+        
 print('Welcome to the Calculator!')
 
-# Ask the user for the first number
-print("What's the First Number?")
+prompt("What's the First Number?")
 first_number = input()
 
-# Ask the user for the second number
-print("What's the Second Number?")
+while invalid_number(first_number):
+    prompt("Hmm... that doesn't look like a valid number.")
+    first_number = input()
+
+prompt("What's the Second Number?")
 second_number = input()
 
-# Print the numbers back to the user
-print(f'{first_number} {second_number}')
-
-#ask for the operation
-print('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide')
+while invalid_number(second_number):
+    prompt("Hmm... that doesn't look like a valid number.")
+    second_number = input()
+    
+prompt('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide')
 operation = input()
 
-if operation == '1':
-  output = int(first_number) + int(second_number)
-elif operation == '2': #2 represents subtraction
-  output = int(first_number) - int(second_number)
-elif operation == '3': #3 represents multiplication
-  output = int(first_number) * int(second_number)
-else: #4 represents division
-  output = int(first_number) / int(second_number)
+while operation not in ['1', '2', '3', '4']:
+    prompt("You must chose 1, 2, 3, or 4.")
+    operation = input()
 
+match operation:
+    case '1': #1 represents addition
+        output = int(first_number) + int(second_number)
+    case '2': #2 represents subtraction
+        output = int(first_number) - int(second_number)
+    case '3': #3 represents multiplication
+        output = int(first_number) * int(second_number)
+    case '4': #4 represents division
+        output = int(first_number) / int(second_number)
 
-print(f"The result is: {output}")
-
-
-# PSUEDOCODE
-# START
-# GET NUMBER1 = USER INPUT
-# GET NUMBER2 = USER INPUT
-# ADD NUMBER1 AND NUMBER2
-# PRINT RESULT
-# END
-
-# PSUEDOCODE
-# START
-# GET Take a list of strings
-# SET Iteration = 0
-# WHILE Iteration < LENGTH OF LIST
-#   Connect the strings together
-#   INCREMENT Iteration
-# PRINT RESULT
-# END
+prompt(f"The result is: {output}")
