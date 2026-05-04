@@ -46,40 +46,50 @@ def display_winner(player, computer):
 ################################################################################
 
 while True:
-    prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
-    choice = input()
+    PLAYER_SCORE = 0
+    COMPUTER_SCORE = 0
 
-    while choice not in VALID_CHOICES and choice not in VALID_CHOICES_ABBREVIATIONS:
-        prompt("That's not a valid choice.")
+    while True:
+        prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
         choice = input()
 
-    if choice[0].lower() == "r":
-        choice = "rock"
-    elif choice[0].lower() == "p":
-        choice = "paper"
-    elif choice[0].lower() == "s":
-        choice = "scissors"
-    elif choice[0].lower() == "l":
-        choice = "lizard"
-    elif choice[0].lower() == "sp":
-        choice = "spock"
+        while choice not in VALID_CHOICES and choice not in VALID_CHOICES_ABBREVIATIONS:
+            prompt("That's not a valid choice.")
+            choice = input()
 
-    computer_choice = random.choice(VALID_CHOICES)
+        if choice == "sp" or choice == "spock":
+            choice = "spock"
+        elif choice[0] == "r":
+            choice = "rock"
+        elif choice[0] == "p":
+            choice = "paper"
+        elif choice[0] == "s":
+            choice = "scissors"
+        elif choice[0] == "l":
+            choice = "lizard"
 
-    prompt(f"You chose {choice}, computer chose {computer_choice}")
+        computer_choice = random.choice(VALID_CHOICES)
+        prompt(f"You chose {choice}, computer chose {computer_choice}")
 
-    display_winner(choice, computer_choice)
-    if COMPUTER_SCORE < 3 and PLAYER_SCORE < 3:
+        display_winner(choice, computer_choice)
+
+        if PLAYER_SCORE == 3:
+            prompt(f"You win the game! Final score - You: {PLAYER_SCORE}, Computer: {COMPUTER_SCORE}")
+            break
+        elif COMPUTER_SCORE == 3:
+            prompt(f"Computer wins the game! Final score - You: {PLAYER_SCORE}, Computer: {COMPUTER_SCORE}")
+            break
+
         prompt(f"Current score - You: {PLAYER_SCORE}, Computer: {COMPUTER_SCORE}")
-        
+
     prompt("Do you want to play again? (y/n)")
     answer = input().lower()
     while True:
         if answer.startswith("n") or answer.startswith("y"):
             break
-
         prompt("Please enter 'y' or 'n'.")
         answer = input().lower()
 
     if answer[0] == "n":
         break
+    
